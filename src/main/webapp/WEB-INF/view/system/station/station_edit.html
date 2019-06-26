@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="ID" value="${item.id}" underline="true"/>
+                            <#input id="jobCode" name="编码" value="${item.jobCode}" underline="true"/>
+                            <#input id="jobName" name="岗位名称" value="${item.jobName}" underline="true"/>
+                            <#input id="jobDepart" name="所属部门" value="${item.jobDepart}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="immediateSuperior" name="上级部门" value="${item.immediateSuperior}" underline="true"/>
+                            <#input id="jobCategory" name="部门类别" value="${item.jobCategory}" underline="true"/>
+                            <#input id="jobDescription" name="岗位描述" value="${item.jobDescription}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="StationInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="StationInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/station/station_info.js"></script>
+@}

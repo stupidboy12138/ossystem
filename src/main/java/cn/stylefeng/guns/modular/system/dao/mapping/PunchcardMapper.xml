@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.PunchcardMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.Punchcard">
+        <id column="Id" property="id" />
+        <result column="punch_man" property="punchMan" />
+        <result column="punch_date" property="punchDate" />
+        <result column="note" property="note" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Id, punch_man, punch_date, note
+    </sql>
+    <update id="updateClocktimeByNameAndPunchtime">
+        update punchcard set clock_out=#{clockOut},off_duty_status=#{offDutyStatus} where punch_man=#{punchMan}
+        <if test="punchDate != null and punchDate != ''">
+            and (punch_date like CONCAT('%',#{punchDate},'%'))
+        </if>
+    </update>
+    <select id="selectPunchcardAttendance" resultType="cn.stylefeng.guns.modular.system.model.Punchcard">
+        select * from punchcard p1 left join punchcard p2 on p1.punch_man=p2.panch_man where 1=1
+        <if test="punchMan != null and punchMan != ''">
+            and (punch_man like CONCAT('%',#{punch_man},'%'))
+        </if>
+        <if test="punchDate != null and punchDate != ''">
+            and (punch_date like CONCAT('%',#{punch_date},'%'))
+        </if>
+        <if test="clockOut != null and clockOut != ''">
+            and (clock_out like CONCAT('%',#{clock_out},'%'))
+        </if>
+    </select>
+    <select id="selectByNameAndTime" resultType="cn.stylefeng.guns.modular.system.model.Punchcard">
+        select * from punchcard where 1=1
+        <if test="punchMan != null and punchMan != '' ">
+            and (punch_man like CONCAT('%',#{punchMan},'%'))
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
+        <![CDATA[
+              AND punch_date >= #{startTime}
+              AND punch_date <= #{endTime}
+]]>
+        </if>
+    </select>
+
+</mapper>

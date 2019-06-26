@@ -1,0 +1,34 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="Id" name="补卡人" value="${item.Id}" underline="true"/>
+                            <#input id="repairMan" name="补卡人" value="${item.repairMan}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="repairDate" name="补卡日期" value="${item.repairDate}" underline="true"/>
+                            <#input id="repairReason" name="补卡原因" value="${item.repairReason}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="RepaircardInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="RepaircardInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/repaircard/repaircard_info.js"></script>
+<script>
+    laydate.render({
+        elem: '#repairDate'
+    });
+</script>
+@}

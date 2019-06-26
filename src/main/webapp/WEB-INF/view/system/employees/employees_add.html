@@ -1,0 +1,52 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="employees-form">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="empCode" name="编码" underline="true" required="required"/>
+                            <#input id="name" name="姓名" underline="true"/>
+                        <#select id="sex" name="性别">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                        </#select>
+                            <#input id="age" name="年龄" underline="true"/>
+                            <#input id="nation" name="民族" underline="true"/>
+                            <#input id="idCard" name="身份证"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="salary" name="工资" underline="true"/>
+                            <#input id="phone" name="联系电话" underline="true"/>
+                            <#input id="emergencyContact" name="紧急联系人" underline="true"/>
+                            <#input id="emergencyContactPhone" name="紧急联系电话" underline="true"/>
+                    <#select id="jobId" name="岗位">
+                    <option value=26>执行总裁</option>
+                    <option value=24>总经理</option>
+                    <option value=27>人力资源管理</option>
+                    <option value=28>后勤</option>
+                    <option value=29>前台</option>
+                    <option value=30>苦逼程序员</option>
+                    <option value=31>算法工程师</option>
+                    <option value=32>市场专员</option>
+                    <option value=33>销售</option>
+                    <option value=34>保洁</option>
+                    <option value=35>会计</option>
+                    </#select>
+                            <#input id="description" name="个人描述" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="EmployeesInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="EmployeesInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/employees/employees_info.js"></script>
+@}

@@ -1,0 +1,47 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="id" underline="true" disabled="disabled"/>
+                            <#input id="jobCode" name="编码" underline="true"/>
+                            <#input id="jobName" name="岗位名称" underline="true"/>
+                    <#select id="jobDepart" name="所属部门">
+                    <option value="总公司">总公司</option>
+                    <option value="开发部">开发部</option>
+                    <option value="运营部">运营部</option>
+                    <option value="战略部">战略部</option>
+                    </#select>
+                </div>
+
+                <div class="col-sm-6">
+                    <#select id="immediateSuperior" name="直接上级">
+                    <option value="总公司">总公司</option>
+                    <option value="开发部">开发部</option>
+                    <option value="运营部">运营部</option>
+                    <option value="战略部">战略部</option>
+                    </#select>
+            <#select id="jobCategory" name="部门类别">
+            <option value="管理岗">管理岗</option>
+            <option value="运营岗">运营岗</option>
+            <option value="开发岗">开发岗</option>
+            <option value="算法">算法岗</option>
+            </#select>
+                            <#input id="jobDescription" name="岗位描述" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="StationInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="StationInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/station/station_info.js"></script>
+@}

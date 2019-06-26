@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="employees-form">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="empId" name="ID" value="${item.empId}" underline="true"/>
+                            <#input id="empCode" name="员工编码" value="${item.empCode}" underline="true"/>
+                            <#input id="name" name="姓名" value="${item.name}" underline="true"/>
+                            <#input id="sex" name="性别" value="${item.sex}" underline="true"/>
+                            <#input id="age" name="年龄" value="${item.age}" underline="true"/>
+                            <#input id="nation" name="民族" value="${item.nation}" underline="true"/>
+                            <#input id="idCard" name="身份证" value="${item.idCard}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="salary" name="工资" value="${item.salary}" underline="true"/>
+                            <#input id="phone" name="联系电话" value="${item.phone}" underline="true"/>
+                            <#input id="emergencyContact" name="紧急联系人" value="${item.emergencyContact}" underline="true"/>
+                            <#input id="emergencyContactPhone" name="紧急联系电话" value="${item.emergencyContactPhone}" underline="true"/>
+                            <#input id="jobId" name="工作ID" value="${item.jobId}" underline="true"/>
+                            <#input id="description" name="个人描述" value="${item.description}" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="EmployeesInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="EmployeesInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/employees/employees_info.js"></script>
+@}

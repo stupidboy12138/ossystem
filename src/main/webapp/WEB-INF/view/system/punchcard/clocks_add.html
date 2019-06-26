@@ -1,0 +1,30 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="punchMan" name="打卡用户" disabled="disabled"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#select id="note" name="上下班打卡">
+                    <option value="上班打卡">上班打卡</option>
+                    <option value="下班打卡">下班打卡</option>
+                    </#select>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="PunchcardInfoDlg.addSubmits()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="PunchcardInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/punchcard/punchcard_info.js"></script>
+@}

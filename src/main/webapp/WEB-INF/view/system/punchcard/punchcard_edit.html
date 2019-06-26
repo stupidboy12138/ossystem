@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="ID" value="${item.id}" disabled="disabled"/>
+                            <#input id="punchMan" name="打卡用户" value="${item.punchMan}" />
+                            <#input id="punchDate" name="上班打卡时间" value="${item.punchDate}" isTime="true"/>
+                            <#input id="clockOut" name="下班打卡时间" value="${item.clockOut}" isTime="false"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#select id="note" name="类型">
+                    <option value="上班打卡">上班打卡</option>
+                    <option value="下班打卡">下班打卡</option>
+                    </#select>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="PunchcardInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="PunchcardInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/punchcard/punchcard_info.js"></script>
+@}
