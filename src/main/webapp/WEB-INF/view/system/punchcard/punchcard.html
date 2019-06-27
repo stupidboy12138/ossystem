@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <#NameCon id="punchMan" name="用户名称" placeholder="人员编码或名称"/>
-                                <#NameCon id="startTime" name="开始时间" placeholder="开始时间"/>
+                                <#NameCon id="startTime" name="开始时间" placeholder="开始时间" />
                                 <#NameCon id="endTime" name="截至时间" placeholder="截至时间"/>
                             </div>
                             <div class="col-sm-3">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="hidden-xs" id="PunchcardTableToolbar" role="group">
                             @if(shiro.hasPermission("/punchcard/add")){
-                            <#button name="批量删除" icon="fa-remove" clickFun="Punchcard.deleteAll()"/>
+                            <#button name="批量删除" btnCss="danger" icon="fa-remove" clickFun="Punchcard.deleteAll()"/>
                             @}
                             @if(shiro.hasPermission("/punchcard/add")){
                                 <#button name="添加" icon="fa-plus" clickFun="Punchcard.openAddPunchcard()"/>
@@ -34,14 +34,14 @@
                             @if(shiro.hasPermission("/punchcard/delete")){
                             <#button name="导出报表" icon="fa-plus" clickFun="Punchcard.exportExcel()" space="true"/>
                             @}
-                            @if(shiro.hasPermission("/punchcard/delete")){
+                            @if(shiro.hasPermission("/punchcard/clocksAdd")){
                             <#button name="打卡" icon="fa-plus" clickFun="Punchcard.clocks()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/repaircard/add")){
-                            <#button name="补卡" icon="fa-plus" clickFun="Repaircard.openAddRepaircard()"/>
+                            <#button name="补卡" icon="fa-plus" clickFun="Repaircard.openAddRepaircard()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/leave/add")){
-                            <#button name="请假" icon="fa-plus" clickFun="Leave.openAddLeave()"/>
+                            <#button name="请假" icon="fa-plus" clickFun="Leave.openAddLeave()" space="true"/>
                             @}
 
                         </div>
@@ -55,4 +55,12 @@
 <script src="${ctxPath}/static/modular/system/punchcard/punchcard.js"></script>
 <script src="${ctxPath}/static/modular/system/repaircard/repaircard.js"></script>
 <script src="${ctxPath}/static/modular/system/leave/leave.js"></script>
+<script>
+    laydate.render({
+        elem: '#startTime'
+    });
+    laydate.render({
+        elem: '#endTime'
+    });
+</script>
 @}

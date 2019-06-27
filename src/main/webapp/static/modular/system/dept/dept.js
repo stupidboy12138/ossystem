@@ -14,7 +14,7 @@ var Dept = {
  */
 Dept.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkbox: true},
         {title: 'id', field: 'id', align: 'center', valign: 'middle',width:'50px'},
         {title: '部门简称', field: 'simplename', align: 'center', valign: 'middle', sortable: true},
         {title: '部门全称', field: 'fullname', align: 'center', valign: 'middle', sortable: true},
@@ -74,8 +74,7 @@ Dept.openDeptDetail = function () {
  */
 Dept.delete = function () {
     if (this.check()) {
-
-        var operation = function(){
+        var operation = function () {
             var ajax = new $ax(Feng.ctxPath + "/dept/delete", function () {
                 Feng.success("删除成功!");
                 Dept.table.refresh();
@@ -84,10 +83,9 @@ Dept.delete = function () {
             });
             ajax.set("deptId",Dept.seItem.id);
             ajax.start();
-        };
-
-        Feng.confirm("是否刪除该部门?", operation);
-    }
+        }
+        Feng.confirm("是否刪除该员工?", operation);
+        }
 };
 
 /**
@@ -97,6 +95,40 @@ Dept.search = function () {
     var queryData = {};
     queryData['condition'] = $("#condition").val();
     Dept.table.refresh({query: queryData});
+};
+
+
+/**
+ * 获取checkbox数组
+ * @returns {*}
+ */
+Dept.getIdSelections =  function() {
+    return $.map($("#DeptTable").bootstrapTable('getSelections'), function (row) {
+        console.log(row.id);
+        return row.id//返回数据行中的id值
+    });
+};
+
+Dept.deleteAll = function() {
+    var ids = Dept.getIdSelections();
+    $.ajax({
+        async: true,
+        type: "get",
+        dataType: "text",//返回数据格式
+        contentType: "application/json;charset=UTF-8",
+        data: {
+            ids:ids
+        },
+        url: "/dept/deleteByIds",
+        success: function(d){
+            Feng.success("批量删除成功!");
+            $("#DeptTable").bootstrapTable('refresh');
+            DeptInfoDlg.close();
+        },
+        error: function(e){
+            Feng.error("批量删除失败!" + data.responseJSON.message + "!");
+        }
+    });
 };
 
 $(function () {

@@ -107,6 +107,7 @@ public class PaysalaryController extends BaseController {
     @ResponseBody
     public Object update(Paysalary paysalary) {
         Long totalHours = Long.valueOf(0);
+        Double reduceMoney= Double.valueOf(0);
 
         //计算两个日期区间的天数
         String dateStr1 = paysalary.getStartTime();
@@ -115,15 +116,18 @@ public class PaysalaryController extends BaseController {
         Date date2 = DateUtil.parse(dateStr2);
         Long betweenDay = DateUtil.between(date1, date2, DateUnit.DAY);
         //计算区间薪水
-        List<Punchcard> punchcards = punchcardMapper.selectByNameAndTime(paysalary.getSalariedPeople(),paysalary.getStartTime(),paysalary.getEndTime());
+        List<Punchcard> punchcards = punchcardMapper.selectByNameAndTime(paysalary.getSalariedPeople(),paysalary.getStartTime(),paysalary.getEndTime(),false);
+        List<Punchcard> leaves = punchcardMapper.selectByNameAndTime(paysalary.getSalariedPeople(),paysalary.getStartTime(),paysalary.getEndTime(),true);
         for (Punchcard punchcard:punchcards){
             Long selectionHours = DateUtil.between(punchcard.getPunchDate(),punchcard.getClockOut(),DateUnit.HOUR);
             totalHours = totalHours+selectionHours;
         }
-        System.out.println(punchcards);
 
+        if (leaves.size()>0){
+            reduceMoney = leaves.size()*4*paysalary.getFixedSalary();
+        }
         Double fixSalary = paysalary.getFixedSalary();
-        Double selectionMoney = totalHours*fixSalary;
+        Double selectionMoney = totalHours*fixSalary+reduceMoney;
         paysalary.setSelectionSalary(selectionMoney);
         paysalaryService.updateById(paysalary);
         return SUCCESS_TIP;

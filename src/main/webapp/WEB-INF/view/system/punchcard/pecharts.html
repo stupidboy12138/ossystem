@@ -1,0 +1,84 @@
+@layout("/common/_container.html"){
+<div id="main" style="width: 600px;height:400px;position:absolute;top:50%;left: 20%;margin-top: -200px;margin-left: -300px;"></div>
+<script src="${ctxPath}/static/modular/echarts/echarts.min.js"></script>
+<div id="main2" style="width: 600px;height:400px;position:absolute;top:50%;left: 70%;margin-top: -200px;margin-left: -300px;"></div>
+<script src="${ctxPath}/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="${ctxPath}/static/modular/system/punchcard/pecharts.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));//main是<div id="main" style="width: 600px;height:400px;"></div>的id
+    var pData = getEcharsData();
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts考勤报表'
+        },
+        tooltip: {},
+        legend: {
+            data:['人/次']
+        },
+        xAxis: {
+            data: ["上班迟到","正常上班","下班早退","正常下班","补卡","请假"]
+        },
+        yAxis: {},
+        series: [{
+            name: '人/次',
+            type: 'bar',
+            data: pData
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('main2'));//main是<div id="main" style="width: 600px;height:400px;"></div>的id
+
+    // 指定图表的配置项和数据
+    var option2 = {
+        title : {
+            text: '考勤情况实时统计',
+            subtext: '考勤情况统计人次',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['上班迟到','正常上班','下班早退','正常下班','补卡','请假']
+        },
+        series : [
+            {
+                name: '考勤人次',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:pData[0], name:'上班迟到'},
+                    {value:pData[1], name:'正常上班'},
+                    {value:pData[2], name:'下班早退'},
+                    {value:pData[3], name:'正常下班'},
+                    {value:pData[4], name:'补卡'},
+                    {value:pData[5], name:'请假'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+</script>
+@}

@@ -109,6 +109,7 @@ Leave.deleteAll = function() {
         success: function(d){
             Feng.success("批量删除成功!");
             $("#LeaveTable").bootstrapTable('refresh');
+            $("#PunchcardTable").bootstrapTable('refresh');
             PunchcardInfoDlg.close();
         },
         error: function(e){

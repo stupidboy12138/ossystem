@@ -18,7 +18,7 @@
                         </div>
                         <div class="hidden-xs" id="StationTableToolbar" role="group">
                             @if(shiro.hasPermission("/station/add")){
-                            <#button name="批量删除" icon="fa-remove" clickFun="Station.deleteAll()"/>
+                            <#button name="批量删除" btnCss="danger" icon="fa-remove" clickFun="Station.deleteAll()"/>
                             @}
                             @if(shiro.hasPermission("/station/add")){
                                 <#button name="添加" icon="fa-plus" clickFun="Station.openAddStation()"/>

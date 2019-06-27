@@ -25,6 +25,7 @@ public interface PunchcardMapper extends BaseMapper<Punchcard> {
                                            @Param("clockOut")Date clockOut,@Param("offDutyStatus") String offDutyStatus);
 
     List<Punchcard> selectByNameAndTime(@Param("punchMan")String punchMan, @Param("startTime")String startTime,
-                                        @Param("endTime")String endTime);
+                                        @Param("endTime")String endTime,@Param("isLeave") boolean isLeave);
 
+    Integer[] selectPcounts();
 }

@@ -4,9 +4,13 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import cn.stylefeng.guns.core.common.annotion.BussinessLog;
+import cn.stylefeng.guns.core.common.annotion.Permission;
+import cn.stylefeng.guns.core.common.constant.dictmap.DeptDict;
 import cn.stylefeng.guns.core.shiro.ShiroKit;
 import cn.stylefeng.guns.modular.system.dao.PunchcardMapper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -84,10 +88,12 @@ public class PunchcardController extends BaseController {
     /**
      * 获取考勤打卡列表
      */
+    @ApiOperation(value = "获取考勤打卡列表")
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(@RequestParam(required = false)String punchMan,@RequestParam(required = false)String startTime,@RequestParam(required = false)String endTime) {
-        return punchcardMapper.selectByNameAndTime(punchMan,startTime,endTime);
+    public Object list(@RequestParam(required = false)String punchMan,@RequestParam(required = false)String startTime,
+                       @RequestParam(required = false)String endTime,@RequestParam(required = false)boolean isLeave) {
+        return punchcardMapper.selectByNameAndTime(punchMan,startTime,endTime,isLeave);
 //        return punchcardService.selectList(null);
     }
 
@@ -95,6 +101,7 @@ public class PunchcardController extends BaseController {
     /**
      * 获取考勤打卡列表
      */
+    @ApiOperation(value = "获取考勤打卡列表")
     @RequestMapping(value = "/myList")
     @ResponseBody
     public Object myList(String condition) {
@@ -104,6 +111,7 @@ public class PunchcardController extends BaseController {
     /**
      * 考勤打卡
      */
+    @ApiOperation(value = "考勤打卡")
     @RequestMapping(value = "/clocksAdd")
     @ResponseBody
     public Object clocksAdd(Punchcard punchcard) throws ParseException {
@@ -133,7 +141,7 @@ public class PunchcardController extends BaseController {
                 redisTemplate.opsForValue().set(ShiroKit.getUser().name+"_"+simpleDateFormat2.format(date),simpleDateFormat2.format(date));
                 punchcard.setPunchMan(ShiroKit.getUser().name);
                 punchcardService.insert(punchcard);
-                return SUCCESS_TIP;
+                return "今日打卡成功";
 
             }
 
@@ -197,6 +205,7 @@ public class PunchcardController extends BaseController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
+    @ApiOperation(value = "增考勤打卡")
     public Object add(Punchcard punchcard) throws ParseException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -252,6 +261,7 @@ public class PunchcardController extends BaseController {
     /**
      * 删除考勤打卡
      */
+    @ApiOperation(value = "删除考勤打卡")
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer id) {
@@ -259,6 +269,7 @@ public class PunchcardController extends BaseController {
         return SUCCESS_TIP;
     }
 
+    @ApiOperation(value = "批量删除")
     @GetMapping("/deleteByIds")
     @ResponseBody
     public Object deleteByIds(@RequestParam(value = "ids[]") Integer[] ids){
@@ -268,6 +279,7 @@ public class PunchcardController extends BaseController {
     /**
      * 修改考勤打卡
      */
+    @ApiOperation(value = "修改考勤打卡")
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Punchcard punchcard) {
@@ -278,14 +290,17 @@ public class PunchcardController extends BaseController {
     /**
      * 考勤打卡详情
      */
+    @ApiOperation(value = "考勤打卡详情")
     @RequestMapping(value = "/detail/{punchcardId}")
     @ResponseBody
     public Object detail(@PathVariable("punchcardId") Integer id) {
         return punchcardService.selectById(id);
     }
 
-
-    @GetMapping(value = "/exportExcel")
+    @ApiOperation(value = "导出Excel")
+    @RequestMapping(value = "/exportExcel")
+    @BussinessLog(value = "111111", key = "simplename")
+    @Permission
     public void exportExcel(HttpServletResponse response) throws IOException {
         List<Punchcard> punchcards = punchcardService.findPunchItem();
 
@@ -296,7 +311,9 @@ public class PunchcardController extends BaseController {
         writer.addHeaderAlias("clockOut","下班打卡时间");
         writer.addHeaderAlias("dutyStatus","上班打卡状态");
         writer.addHeaderAlias("offDutyStatus","下班打卡状态");
-        writer.addHeaderAlias("note","备注");
+        writer.addHeaderAlias("note","类型");
+        writer.addHeaderAlias("isRepair","是否补卡");
+        writer.addHeaderAlias("isLeave","是否请假");
         writer.setColumnWidth(2,30);
         writer.setColumnWidth(3,30);
 
@@ -315,5 +332,16 @@ public class PunchcardController extends BaseController {
         writer.close();
         //此处记得关闭输出Servlet流
         IoUtil.close(out);
+    }
+
+    @GetMapping("/echarts")
+    public String test(){
+        return PREFIX + "pecharts.html";
+    }
+
+    @GetMapping("/punchcardCount")
+    @ResponseBody
+    public Integer[] punchcardCount(){
+        return punchcardMapper.selectPcounts();
     }
 }

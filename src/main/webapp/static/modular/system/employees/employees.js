@@ -97,15 +97,19 @@ Employees.openEmployeesDetail = function () {
  */
 Employees.delete = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/employees/delete", function (data) {
-            Feng.success("删除成功!");
-            Employees.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
-        });
-        ajax.set("empId",this.seItem.empId);
-        ajax.start();
-    }
+
+        // var operation = function () {
+            var ajax = new $ax(Feng.ctxPath + "/employees/delete", function (data) {
+                Feng.success("删除成功!");
+                Employees.table.refresh();
+            }, function (data) {
+                Feng.error("删除失败!" + data.responseJSON.message + "!");
+            });
+            ajax.set("empId", this.seItem.empId);
+            ajax.start();
+        };
+        // Feng.confirm("是否刪除该员工?", operation);
+    // }
 };
 
 /**

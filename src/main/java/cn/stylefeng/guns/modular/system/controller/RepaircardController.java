@@ -92,7 +92,8 @@ public class RepaircardController extends BaseController {
         }else {
             Punchcard newPunchcard = new Punchcard();
             newPunchcard.setPunchMan(repaircard.getRepairMan());
-            newPunchcard.setPunchDate(DateUtil.parse(repaircard.getRepairDate()));
+            newPunchcard.setPunchDate(DateUtil.offsetHour(DateUtil.parse(repaircard.getRepairDate()),9));
+            newPunchcard.setClockOut(DateUtil.offsetHour(DateUtil.parse(repaircard.getRepairDate()),17));
             newPunchcard.setRepair(true);
             newPunchcard.setNote("补卡");
             punchcardService.insert(newPunchcard);

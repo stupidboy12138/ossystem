@@ -22,23 +22,23 @@ Punchcard.initColumn = function () {
             {title: '上班状态',field:'dutyStatus', visible: true, align: 'center', valign: 'middle',
                 formatter: function (value, row, index) {
                     if (row.dutyStatus=="正常上班") {
-                        return '<button type="button" class="btn btn-info">正常上班</button>';
+                        return '<button type="button" class="btn btn-info">正  常</button>';
                     }
                     else if (row.dutyStatus=="上班迟到"){
-                        return '<button type="button" class="btn btn-danger">上班迟到</button>';
+                        return '<button type="button" class="btn btn-danger">迟  到</button>';
                     }else {
-                        return '<button type="button" class="btn btn-success">'+row.note+'</button>';
+                        return '<button type="button" class="btn btn-info">'+row.note+'</button>';
                     }
                 }},
             {title: '下班状态', field: 'offDutyStatus', visible: true, align: 'center', valign: 'middle',             formatter: function (value, row, index) {
 
                     if (row.offDutyStatus=="正常下班") {
-                        return '<button type="button" class="btn btn-info">正常下班</button>';
+                        return '<button type="button" class="btn btn-info btn-primary">正  常</button>';
                     }
                     else if (row.offDutyStatus=="下班早退") {
-                        return '<button type="button" class="btn btn-danger">下班早退</button>';
+                        return '<button type="button" class="btn btn-danger btn-large">早  退</button>';
                     }else {
-                        return '<button type="button" class="btn btn-success">'+row.note+'</button>';
+                        return '<button type="button" class="btn btn-info btn-small">'+row.note+'</button>';
                     }
                 }},
             {title: '是否补卡', field: 'repair', visible: true, align: 'center', valign: 'middle',
@@ -199,7 +199,8 @@ Punchcard.deleteAll = function() {
             Feng.error("批量删除失败!" + data.responseJSON.message + "!");
         }
     });
-}
+};
+
 
 
 $(function () {

@@ -32,10 +32,14 @@
             and (clock_out like CONCAT('%',#{clock_out},'%'))
         </if>
     </select>
+
     <select id="selectByNameAndTime" resultType="cn.stylefeng.guns.modular.system.model.Punchcard">
         select * from punchcard where 1=1
         <if test="punchMan != null and punchMan != '' ">
             and (punch_man like CONCAT('%',#{punchMan},'%'))
+        </if>
+        <if test="isLeave != null and isLeave != '' ">
+            and (is_leave=#{isLeave})
         </if>
         <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
         <![CDATA[
@@ -43,6 +47,14 @@
               AND punch_date <= #{endTime}
 ]]>
         </if>
+    </select>
+    <select id="selectPcounts" resultType="java.lang.Integer">
+        select count(*) from punchcard where duty_status='上班迟到' and is_repair=false and is_leave=false
+        union all select count(*) from punchcard where duty_status='正常上班' and is_repair=false and is_leave=false
+        union all select count(*) from punchcard where off_duty_status='下班早退' and is_repair=false and is_leave=false
+        union all select count(*) from punchcard where off_duty_status='正常下班' and is_repair=false and is_leave=false
+        union all select count(*) from punchcard where is_repair=1
+        union all select count(*) from punchcard where is_leave=1
     </select>
 
 </mapper>

@@ -83,6 +83,7 @@ public class LeaveController extends BaseController {
         wrapper.eq("punch_man",leave.getLeaveMan()).and().between("punch_date", DateUtil.parse(leave.getStartTime()),DateUtil.parse(leave.getEndTime()));
         List<Punchcard> punchcards = punchcardService.selectList(wrapper);
         long betweenDay = DateUtil.between(DateUtil.parse(leave.getStartTime()), DateUtil.parse(leave.getEndTime()), DateUnit.DAY);
+        //如果请假区间不存在打卡记录
         if (punchcards.size()==0){
             //循环依次插入请假记录
             for(long i=0 ;i<betweenDay; i++ ){
@@ -91,10 +92,20 @@ public class LeaveController extends BaseController {
                 Punchcard punchcard = new Punchcard();
                 punchcard.setPunchMan(leave.getLeaveMan());
                 punchcard.setNote("请假");
+                punchcard.setDutyStatus("请假");
+                punchcard.setOffDutyStatus("请假");
                 punchcard.setLeave(true);
                 punchcard.setPunchDate(DateUtil.offsetDay(nextDay,9));
                 punchcard.setClockOut(DateUtil.offsetHour(nextDay,17));
                 punchcardService.insert(punchcard);
+            }
+        }else {
+            for (Punchcard punchcard:punchcards) {
+                if (punchcard.getPunchDate()==null){
+
+                }else {
+
+                }
             }
         }
         leaveService.insert(leave);
