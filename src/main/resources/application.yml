@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
 
 guns:
   swagger-open: true              #是否开启swagger (true/false)
@@ -70,10 +70,11 @@ log:
 spring:
   profiles: local
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/gunsoasys?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    url: jdbc:mysql://xcx.gaoxiao114.cn:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
     username: root
-    password:
+    password: xiaoliewang0425
     filters: wall,mergeStat
+
 
 #多数据源情况的配置
 guns:
