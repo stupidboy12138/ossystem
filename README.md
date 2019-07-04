@@ -1,5 +1,6 @@
 #三五考勤系统
-
+github地址：https://github.com/stupidboy12138/ossystem
+阿里云docker镜像地址：registry.cn-hangzhou.aliyuncs.com/xiaoo/oasys:latest
 ## 管理系统功能
 1.用户管理 2.角色管理 3.部门管理 4.菜单管理 5.字典管理 6.业务日志 7.登录日志 8.监控管理 9.通知管理 10.代码生成
 

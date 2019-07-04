@@ -200,7 +200,6 @@
             <version>3.0.0.6</version>
         </dependency>
 
-<<<<<<< HEAD
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -215,8 +214,6 @@
             <version>1.4.10</version>
         </dependency>
 
-=======
->>>>>>> c57f6a573a31c303566ae2a0fe0f703e0f4d940a
 
     </dependencies>
 
@@ -328,6 +325,7 @@
                         <nonFilteredFileExtension>pem</nonFilteredFileExtension>
                         <nonFilteredFileExtension>pfx</nonFilteredFileExtension>
                         <nonFilteredFileExtension>p12</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                     <delimiters>
                         <delimiter>@</delimiter>
@@ -335,9 +333,7 @@
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
 
-<<<<<<< HEAD
             </plugin>
-=======
 <!--            <plugin>-->
 <!--                <groupId>com.spotify</groupId>-->
 <!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
@@ -360,7 +356,6 @@
 <!--                </configuration>-->
 <!--            </plugin>-->
 
->>>>>>> c57f6a573a31c303566ae2a0fe0f703e0f4d940a
             <!--docker-maven-plugin插件(带Dockerfile文件)-->
 <!--            <plugin>-->
 <!--                <groupId>com.spotify</groupId>-->
