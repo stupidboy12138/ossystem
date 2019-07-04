@@ -1,6 +1,7 @@
 package cn.stylefeng.guns.modular.system.controller;
 
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -88,6 +89,7 @@ public class ClassesController extends BaseController {
     /**
      * 修改排班表
      */
+    @ApiOperation(value = "修改排班表")
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Classes classes) {

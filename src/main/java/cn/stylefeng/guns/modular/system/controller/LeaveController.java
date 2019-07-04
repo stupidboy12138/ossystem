@@ -7,6 +7,7 @@ import cn.stylefeng.guns.modular.system.model.Punchcard;
 import cn.stylefeng.guns.modular.system.service.IPunchcardService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -76,6 +77,7 @@ public class LeaveController extends BaseController {
     /**
      * 新增请假单
      */
+    @ApiOperation(value = "请假")
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Leave leave) {

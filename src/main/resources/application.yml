@@ -1,9 +1,14 @@
 server:
-  port: 80
+  port: 8888
+#  ssl:
+#    key-store: classpath:www.xiaoo.online.jks
+
+#    key-store-password: xzl18900297523
+#    key-store-type: JKS
 
 guns:
   swagger-open: true              #是否开启swagger (true/false)
-  kaptcha-open: false             #是否开启登录时验证码 (true/false)
+  kaptcha-open: true            #是否开启登录时验证码 (true/false)
   #  file-upload-path: d:/tmp     #文件上传目录(不配置的话为java.io.tmpdir目录)
   spring-session-open: false      #是否开启spring session,如果是多机环境需要开启(true/false)
   session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
@@ -28,6 +33,11 @@ spring:
     multipart:
       max-request-size: 100MB
       max-file-size: 100MB
+  redis:        #用来存储access_token
+    host: 47.103.0.195
+    port: 6379
+    database: 1
+    timeout: 7200S
 #  quartz:
 #    #相关属性配置
 #    properties:

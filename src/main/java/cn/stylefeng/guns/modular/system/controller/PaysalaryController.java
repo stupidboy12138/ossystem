@@ -7,6 +7,8 @@ import cn.stylefeng.guns.modular.system.dao.PunchcardMapper;
 import cn.stylefeng.guns.modular.system.model.Punchcard;
 import cn.stylefeng.guns.modular.system.service.IPunchcardService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -105,6 +107,7 @@ public class PaysalaryController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
+    @ApiOperation(value = "修改区间")
     public Object update(Paysalary paysalary) {
         Long totalHours = Long.valueOf(0);
         Double reduceMoney= Double.valueOf(0);

@@ -29,6 +29,7 @@ import cn.stylefeng.guns.modular.system.service.IUserService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import com.google.code.kaptcha.Constants;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,7 @@ public class LoginController extends BaseController {
     /**
      * 点击登录执行的动作
      */
+    @ApiOperation(value = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginVali() {
 
@@ -141,6 +143,7 @@ public class LoginController extends BaseController {
     /**
      * 退出登录
      */
+    @ApiOperation(value = "退出登录")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logOut() {
         LogManager.me().executeLog(LogTaskFactory.exitLog(ShiroKit.getUser().getId(), getIp()));

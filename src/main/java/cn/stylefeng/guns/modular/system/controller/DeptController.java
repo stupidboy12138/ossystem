@@ -28,6 +28,7 @@ import cn.stylefeng.guns.modular.system.warpper.DeptWarpper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -176,6 +177,7 @@ public class DeptController extends BaseController {
     }
 
 
+    @ApiOperation(value = "批量删除部门")
     @GetMapping("deleteByIds")
     @ResponseBody
     public boolean deleteByIds(@RequestParam(value = "ids[]") Integer[] ids){

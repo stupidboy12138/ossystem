@@ -299,8 +299,6 @@ public class PunchcardController extends BaseController {
 
     @ApiOperation(value = "导出Excel")
     @RequestMapping(value = "/exportExcel")
-    @BussinessLog(value = "111111", key = "simplename")
-    @Permission
     public void exportExcel(HttpServletResponse response) throws IOException {
         List<Punchcard> punchcards = punchcardService.findPunchItem();
 

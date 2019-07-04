@@ -1,6 +1,7 @@
 package cn.stylefeng.guns.modular.system.controller;
 
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -87,6 +88,7 @@ public class StationController extends BaseController {
     /**
      * 修改岗位管理
      */
+    @ApiOperation(value = "修改岗位管理")
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Station station) {
@@ -103,6 +105,7 @@ public class StationController extends BaseController {
         return stationService.selectById(stationId);
     }
 
+    @ApiOperation(value = "批量删除岗位")
     @GetMapping("/deleteByIds")
     @ResponseBody
     public boolean deleteByIds(@RequestParam("ids[]") Integer[] ids){

@@ -31,6 +31,7 @@
         <if test="clockOut != null and clockOut != ''">
             and (clock_out like CONCAT('%',#{clock_out},'%'))
         </if>
+        order by punch_date desc
     </select>
 
     <select id="selectByNameAndTime" resultType="cn.stylefeng.guns.modular.system.model.Punchcard">
@@ -47,6 +48,7 @@
               AND punch_date <= #{endTime}
 ]]>
         </if>
+        order by punch_date desc
     </select>
     <select id="selectPcounts" resultType="java.lang.Integer">
         select count(*) from punchcard where duty_status='上班迟到' and is_repair=false and is_leave=false

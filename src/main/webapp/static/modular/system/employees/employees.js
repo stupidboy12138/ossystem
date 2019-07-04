@@ -63,7 +63,45 @@ Employees.check = function () {
 /**
  * 点击添加员工管理
  */
+// $(document).ready(function () {
+//     var a = document.getElementById("salary")
+//     console.log(a)
+// })
 Employees.openAddEmployees = function () {
+    // var jobid = document.getElementById("salary")
+    // console.log(jobid)
+    // console.log($("#salary").val())
+    // var newOption = document.createElement("option")
+    // newOption.innerHTML = "asdasd"
+    // jobid.appendChild(newOption)
+    // $.ajax({
+    //     async:false,
+    //     type:"GET",
+    //     dataType:"json",
+    //     url:"/station/list",
+    //     contentType: "application/json;charset=UTF-8",
+    //     data:{
+    //
+    //     },
+    //     success:function (data,status) {
+    //         console.log(data)
+    //         $("#jobIdSSS").append(  //此处向select中循环绑定数据
+    //             "<option value=26>执行总裁</option>")
+    //         var option
+    //         $.each(data, function(index, item) {
+    //             console.log(item.id);
+    //             console.log(item.jobName);
+    //             option = "<option value=" + item.id + ">" +item.jobName+ "</option>";
+    //             console.log("111111111"+$("#jobId").val())
+    //             $("#jobIdSSS").append(  //此处向select中循环绑定数据
+    //             option)
+    //         });
+    //      }
+    //     });
+
+
+
+
     var index = layer.open({
         type: 2,
         title: '添加员工管理',
@@ -158,6 +196,23 @@ Employees.deleteAll = function() {
 
 
 $(function () {
+    $.ajax({
+        async:false,
+        type:"GET",
+        dataType:"json",
+        url:"/station/list",
+        contentType: "application/json;charset=UTF-8",
+        data:{
+
+        },
+        success:function (data,status) {
+            $.each(data, function(index, item) {
+                $("#jobId").append(  //此处向select中循环绑定数据
+                    "<option value=" + item.id + ">" +item.jobName+ "</option>")
+            });
+        }
+    });
+
     var defaultColunms = Employees.initColumn();
     var table = new BSTable(Employees.empId, "/employees/list", defaultColunms);
     table.setPaginationType("client");

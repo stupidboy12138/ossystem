@@ -3,6 +3,7 @@ package cn.stylefeng.guns.modular.system.controller;
 import cn.stylefeng.guns.modular.system.dao.EmployeesMapper;
 import cn.stylefeng.guns.modular.system.dto.EmployeesDTO;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -108,12 +109,14 @@ public class EmployeesController extends BaseController {
     }
 
 
+    @ApiOperation(value = "按名称搜索")
     @GetMapping("/findByName")
     @ResponseBody
     public List<EmployeesDTO> findByName(@RequestParam(required = false)String name,@RequestParam(required = false)String empCode){
         return employeesService.findEmployeeByNameAndEmpCode(name,empCode);
     }
 
+    @ApiOperation(value = "批量删除员工")
     @GetMapping("deleteByIds")
     @ResponseBody
     public boolean deleteByIds(@RequestParam(value = "ids[]") Integer[] ids){

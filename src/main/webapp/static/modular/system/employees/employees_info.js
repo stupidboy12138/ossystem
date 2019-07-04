@@ -61,7 +61,8 @@ var EmployeesInfoDlg = {
                 }
             }
         }
-    }
+    },
+
 };
 
 /**
@@ -134,6 +135,7 @@ EmployeesInfoDlg.validate = function () {
  * 提交添加
  */
 EmployeesInfoDlg.addSubmit = function() {
+
 
     this.clearData();
     this.collectData();
